@@ -1,9 +1,77 @@
-import React from 'react'
+import { useSelector } from "react-redux";
+import { LogoutBtn, Logo, Container } from "../index";
+import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function Header() {
+  const authStatus = useSelector((state) => state.auth.status);
+
+  const navItems = [
+    {
+      name: "Home",
+      slug: "/",
+      active: true,
+    },
+    {
+      name: "Login",
+      slug: "/login",
+      active: !authStatus,
+    },
+    {
+      name: "Signup",
+      slug: "/signup",
+      active: !authStatus,
+    },
+    {
+      name: "All Post",
+      slug: "/all-post",
+      active: authStatus,
+    },
+    {
+      name: "Add Post",
+      slug: "/addpost",
+      active: authStatus,
+    },
+  ];
+
   return (
-    <div>Header</div>
-  )
+    <header className="py-3 shadow bg-gray-500">
+      <Container>
+        <nav className="flex items-center justify-between ">
+          <div className="mr-4 ">
+            <Link to="/">
+              <Logo width="70px" />
+            </Link>
+          </div>
+          <ul className="flex ml-auto">
+            {navItems.map((item) =>
+              item.active ? (
+                <li key={item.name}>
+                  <NavLink
+                    to={item.slug}
+                    className={({ isActive }) =>
+                      `inline-block px-6 py-2 duration-200 rounded-full ${
+                        isActive
+                          ? "bg-blue-100 text-black"
+                          : "hover:bg-blue-100 text-black"
+                      }`
+                    }
+                  >
+                    {item.name}
+                  </NavLink>
+                </li>
+              ) : null
+            )}
+            {authStatus && (
+              <li>
+                <LogoutBtn />
+              </li>
+            )}
+          </ul>
+        </nav>
+      </Container>
+    </header>
+  );
 }
 
-export default Header
+export default Header;
