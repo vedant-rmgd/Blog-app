@@ -1,13 +1,13 @@
-import {Container, PostForm} from "../components/index"
+import { Container, PostForm } from "../components/index";
 
 function AddPost() {
   return (
     <div className="py-8">
-        <Container>
-            <AddPost/>
-        </Container>
+      <Container>
+        <PostForm />
+      </Container>
     </div>
-  )
+  );
 }
 
-export default AddPost
+export default AddPost;

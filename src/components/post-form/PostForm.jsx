@@ -56,7 +56,7 @@ function PostForm({ post }) {
       }
     }
   };
-  
+
   const slugTransform = useCallback((value) => {
     if (value && typeof value === "string") {
       return value
@@ -87,7 +87,7 @@ function PostForm({ post }) {
   }, [watch, slugTransform, setValue]);
 
   return (
-    <form onSubmit={handleSubmit(submit)}>
+    <form onSubmit={handleSubmit(submit)} className="flex flex-wrap">
       <div className="w-2/3 px-2">
         <Input
           label="Title"
