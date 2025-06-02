@@ -5,6 +5,8 @@ import { useSelector } from "react-redux";
 import { RTE, Input, Button, Select } from "../index";
 import service from "../../appwrite/config";
 import storageService from "../../appwrite/storageService";
+import { useDispatch } from "react-redux";
+import { setSelectedPost, setPosts } from "../../store/postSlice";
 
 function PostForm({ post }) {
   const { register, handleSubmit, watch, setValue, control, getValues } =
@@ -19,6 +21,8 @@ function PostForm({ post }) {
 
   const navigate = useNavigate();
   const userData = useSelector((state) => state.auth.userData);
+  const posts = useSelector((state) => state.posts.posts);
+  const dispatch = useDispatch();
   const [localImage, setLocalImage] = useState(null);
 
   const submit = async (data) => {
@@ -37,6 +41,11 @@ function PostForm({ post }) {
       });
 
       if (dbPost) {
+        dispatch(setSelectedPost(dbPost));
+        const updatedPosts = posts.map((p) =>
+          p.$id === dbPost.$id ? dbPost : p
+        );
+        dispatch(setPosts(updatedPosts));
         navigate(`/post/${dbPost.$id}`);
       }
     } else {
@@ -51,6 +60,7 @@ function PostForm({ post }) {
           userId: userData.$id,
         });
         if (dbPost) {
+          dispatch(setPosts([...posts, dbPost]));
           navigate(`/post/${dbPost.$id}`);
         }
       }

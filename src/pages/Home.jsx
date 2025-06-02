@@ -1,20 +1,34 @@
-import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import service from "../appwrite/config";
 import { Container, PostCard } from "../components";
 import { Link } from "react-router-dom";
+import { setPosts, setLoading, setError } from "../store/postSlice";
 
 function Home() {
-  const [posts, setPosts] = useState([]);
   const userData = useSelector((state) => state.auth.userData);
+  const dispatch = useDispatch();
+  const { posts, loading, error } = useSelector((state) => state.posts);
 
   useEffect(() => {
-    service.getPosts().then((posts) => {
-      if (posts) {
-        setPosts(posts.documents);
-      }
-    });
-  }, []);
+    if (userData) {
+      const fetchPosts = async () => {
+        dispatch(setLoading(true));
+        try {
+          const post = await service.getPosts();
+          if (post) {
+            dispatch(setPosts(post.documents));
+          } else {
+            dispatch(setPosts([]));
+          }
+        } catch (error) {
+          dispatch(setError(error.message || "Failed to fetch posts"));
+        }
+      };
+
+      fetchPosts();
+    }
+  }, [userData, dispatch]);
 
   if (!userData) {
     return (
@@ -35,6 +49,11 @@ function Home() {
   return (
     <div className="w-full py-8">
       <Container>
+        {loading && <p className="text-center w-full">Loading posts...</p>}
+        {error && <p className="text-center text-red-500">{error}</p>}
+        {!loading && posts.length === 0 && (
+          <p className="text-center w-full">No posts found.</p>
+        )}
         <div className="flex flex-wrap">
           {posts.map((post) => (
             <div key={post.$id} className="p-2 w-1/4">

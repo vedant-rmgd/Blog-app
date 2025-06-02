@@ -18,7 +18,7 @@ function Signup() {
       const session = await authService.createAccount(data);
       if (session) {
         const userData = await authService.getCurrentUser();
-        if (userData) dispatch(login());
+        if (userData) dispatch(login(userData))
         navigate("/");
       }
     } catch (error) {
@@ -53,7 +53,7 @@ function Signup() {
             <Input
               label="Full Name"
               placeholder="Enter your full name"
-              {...register("Full name", {
+              {...register("name", {
                 required: true,
               })}
             />

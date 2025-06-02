@@ -6,13 +6,14 @@ import { Provider } from "react-redux";
 import store from "./store/store.js";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import AddPost from "./pages/AddPost.jsx";
-import AllPosts from "./pages/AllPosts.jsx";
+import MyPosts from "./pages/MyPosts.jsx";
 import EditPost from "./pages/EditPost.jsx";
 import Home from "./pages/Home.jsx";
 import Login from "./pages/Login.jsx";
 import Post from "./pages/Post.jsx";
 import Signup from "./pages/Signup.jsx";
 import Protected from "./components/authLayout.jsx";
+import SavedPosts from "./pages/SavedPosts.jsx";
 
 const router = createBrowserRouter([
   {
@@ -40,10 +41,10 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/all-posts",
+        path: "/my-posts",
         element: (
           <Protected authentication>
-            <AllPosts />
+            <MyPosts />
           </Protected>
         ),
       },
@@ -54,6 +55,14 @@ const router = createBrowserRouter([
             <AddPost />
           </Protected>
         ),
+      },
+      {
+        path: "/saved-posts",
+        element: (
+          <Protected authentication>
+            <SavedPosts/>
+          </Protected>
+        )
       },
       {
         path: "/edit-post/:slug",

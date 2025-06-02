@@ -23,8 +23,8 @@ function Header() {
       active: !authStatus,
     },
     {
-      name: "All Posts",
-      slug: "/all-posts",
+      name: "My Posts",
+      slug: "/my-posts",
       active: authStatus,
     },
     {
@@ -32,6 +32,11 @@ function Header() {
       slug: "/add-post",
       active: authStatus,
     },
+    {
+      name: "Saved Posts",
+      slug: "/saved-posts",
+      active: authStatus
+    }
   ];
 
   return (

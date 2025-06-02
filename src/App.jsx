@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import authService from "./appwrite/auth";
 import { login, logout } from "./store/authSlice";
 import { Outlet } from "react-router-dom";
+import { setAllSavedPosts } from "./store/postSlice";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -16,6 +17,10 @@ function App() {
       .then((userData) => {
         if (userData) {
           dispatch(login(userData));
+
+          // Load saved posts from localStorage
+          const saved = JSON.parse(localStorage.getItem("savedPosts")) || [];
+          dispatch(setAllSavedPosts(saved));
         } else {
           dispatch(logout());
         }
