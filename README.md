@@ -33,10 +33,10 @@ React Router -	     Client-side routing between pages
 Tailwind CSS - 	    Utility-first styling framework for UI
 
 ## 🧪 How to Run Locally
-git clone https://github.com/vedant-rmgd/Blog-app
-cd Blog-app
-npm install
-npm run dev
+git clone https://github.com/vedant-rmgd/Blog-app  
+cd Blog-app  
+npm install  
+npm run dev  
 
 ## 📜 License
 This project is open-source and available under the MIT License.
