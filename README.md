@@ -1,7 +1,7 @@
-#📝 Blog App
+# 📝 Blog App
 A fully functional and modern blog application built using React, Redux, React Hook Form, TinyMCE, and Appwrite for backend services. This project features authentication, post creation, editing, saving, and more — all wrapped in a clean, reusable, and component-based architecture.
 
-##🚀 Features
+## 🚀 Features
 🔐 Authentication (Signup, Login, Logout) via Appwrite
 
 📝 Create, Edit, Delete, and View Posts
@@ -22,8 +22,8 @@ A fully functional and modern blog application built using React, Redux, React H
 
 🧠 Optimized logic to avoid unnecessary backend calls
 
-##🧰 Tech Stack Used
-###Tech	            ####Purpose
+## 🧰 Tech Stack Used
+### Tech	            #### Purpose
 React -	             Frontend framework for building UI
 Redux Toolkit -	     Global state management (auth state, posts, saved posts)
 React Hook Form	-    Efficient and performant form handling
@@ -32,11 +32,11 @@ Appwrite -           Backend as a service (Auth, DB, File Storage)
 React Router -	     Client-side routing between pages
 Tailwind CSS - 	    Utility-first styling framework for UI
 
-##🧪 How to Run Locally
+## 🧪 How to Run Locally
 git clone https://github.com/vedant-rmgd/Blog-app
 cd Blog-app
 npm install
 npm run dev
 
-##📜 License
+## 📜 License
 This project is open-source and available under the MIT License.
