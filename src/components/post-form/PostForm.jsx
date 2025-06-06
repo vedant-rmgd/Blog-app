@@ -10,6 +10,7 @@ import {
   setSelectedPost,
   setPosts,
   addSavedPosts,
+  setSavedPosts
 } from "../../store/postSlice";
 
 function PostForm({ post }) {
@@ -40,18 +41,10 @@ function PostForm({ post }) {
         await storageService.deleteFile(post.featuredImage);
       }
 
-      // const dbPost = await service.updatePost(post.$id, {
-      //   ...data,
-      //   featuredImage: file ? file.$id : undefined,
-      // });
-
-      await service.updatePost(post.$id, {
+      const dbPost = await service.updatePost(post.$id, {
         ...data,
         featuredImage: file ? file.$id : undefined,
       });
-
-      // ✅ Fetch the fully updated post
-      const dbPost = await service.getPost(post.$id);
 
       if (dbPost) {
         dispatch(setSelectedPost(dbPost));
@@ -66,7 +59,8 @@ function PostForm({ post }) {
           const updatedSavedPosts = savedPosts.map((post) =>
             post.$id === dbPost.$id ? dbPost : post
           );
-          dispatch(addSavedPosts(updatedSavedPosts));
+          //dispatch(addSavedPosts(updatedSavedPosts));
+          dispatch(setSavedPosts(updatedSavedPosts));
           localStorage.setItem("savedPosts", JSON.stringify(updatedSavedPosts));
         }
         navigate(`/post/${dbPost.$id}`);

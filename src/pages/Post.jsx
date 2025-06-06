@@ -9,6 +9,7 @@ import {
   setSelectedPost,
   addSavedPosts,
   removeSavedPosts,
+  unsetSavedPost,
   setLoading,
   setError,
   setPosts,
@@ -73,6 +74,7 @@ function Post() {
       }
     });
     dispatch(removeSavedPosts(selectedPost.$id));
+    dispatch(unsetSavedPost(selectedPost.$id))
 
     const stored = JSON.parse(localStorage.getItem("savedPosts")) || [];
     const updated = stored.filter((post) => post.$id !== selectedPost.$id);
@@ -81,13 +83,19 @@ function Post() {
 
   const handleSave = () => {
     dispatch(addSavedPosts(selectedPost));
+
     const stored = JSON.parse(localStorage.getItem("savedPosts")) || [];
-    const updated = [...stored, selectedPost];
-    localStorage.setItem("savedPosts", JSON.stringify(updated));
+
+    const alreadyExists = stored.find((post) => post.$id === selectedPost.$id);
+    if (!alreadyExists) {
+      const updated = [...stored, selectedPost];
+      localStorage.setItem("savedPosts", JSON.stringify(updated));
+    }
   };
 
   const handleUnsave = () => {
     dispatch(removeSavedPosts(selectedPost.$id));
+     dispatch(unsetSavedPost(selectedPost.$id))
     const stored = JSON.parse(localStorage.getItem("savedPosts")) || [];
     const updated = stored.filter((post) => post.$id !== selectedPost.$id);
     localStorage.setItem("savedPosts", JSON.stringify(updated));

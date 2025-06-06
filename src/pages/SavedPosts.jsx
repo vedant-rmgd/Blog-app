@@ -1,9 +1,18 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Container, PostCard } from "../components";
+import { setSavedPosts } from "../store/postSlice";
+import { useEffect } from "react";
 
 function SavedPosts() {
   const savedPosts = useSelector((state) => state.posts.savedPosts);
-  console.log(savedPosts)
+  const dispatch = useDispatch();
+  console.log(savedPosts);
+
+  useEffect(() => {
+    const stored = JSON.parse(localStorage.getItem("savedPosts")) || [];
+    dispatch(setSavedPosts(stored));
+  }, []);
+
   return (
     <div className="w-full py-8">
       <Container>

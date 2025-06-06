@@ -30,6 +30,14 @@ const postSlice = createSlice({
         (post) => post.$id !== action.payload
       );
     },
+    setSavedPosts: (state, action) => {
+      state.savedPosts = action.payload;
+    },
+    unsetSavedPost: (state, action) => {
+      state.savedPosts = state.savedPosts.filter(
+        (post) => post.$id !== action.payload
+      );
+    },
     setSelectedPost: (state, action) => {
       state.selectedPost = action.payload;
       state.loading = false;
@@ -52,6 +60,8 @@ export const {
   setSelectedPost,
   addSavedPosts,
   removeSavedPosts,
+  setSavedPosts,
+  unsetSavedPost,
   setAllSavedPosts,
   setLoading,
   setError,
