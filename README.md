@@ -23,7 +23,7 @@ A fully functional and modern blog application built using React, Redux, React H
 🧠 Optimized logic to avoid unnecessary backend calls
 
 ## 🧰 Tech Stack Used
-### Tech	            #### Purpose
+### Tech	         Purpose
 React -	             Frontend framework for building UI
 Redux Toolkit -	     Global state management (auth state, posts, saved posts)
 React Hook Form	-    Efficient and performant form handling
