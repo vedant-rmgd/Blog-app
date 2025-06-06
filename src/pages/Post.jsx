@@ -72,22 +72,26 @@ function Post() {
         navigate("/");
       }
     });
+    dispatch(removeSavedPosts(selectedPost.$id));
+
+    const stored = JSON.parse(localStorage.getItem("savedPosts")) || [];
+    const updated = stored.filter((post) => post.$id !== selectedPost.$id);
+    localStorage.setItem("savedPosts", JSON.stringify(updated));
   };
 
   const handleSave = () => {
-  dispatch(addSavedPosts(selectedPost));
-  const stored = JSON.parse(localStorage.getItem("savedPosts")) || [];
-  const updated = [...stored, selectedPost];
-  localStorage.setItem("savedPosts", JSON.stringify(updated));
-};
+    dispatch(addSavedPosts(selectedPost));
+    const stored = JSON.parse(localStorage.getItem("savedPosts")) || [];
+    const updated = [...stored, selectedPost];
+    localStorage.setItem("savedPosts", JSON.stringify(updated));
+  };
 
-
- const handleUnsave = () => {
-  dispatch(removeSavedPosts(selectedPost.$id));
-  const stored = JSON.parse(localStorage.getItem("savedPosts")) || [];
-  const updated = stored.filter((post) => post.$id !== selectedPost.$id);
-  localStorage.setItem("savedPosts", JSON.stringify(updated));
-};
+  const handleUnsave = () => {
+    dispatch(removeSavedPosts(selectedPost.$id));
+    const stored = JSON.parse(localStorage.getItem("savedPosts")) || [];
+    const updated = stored.filter((post) => post.$id !== selectedPost.$id);
+    localStorage.setItem("savedPosts", JSON.stringify(updated));
+  };
 
   if (loading || localLoading) {
     return (
@@ -141,7 +145,6 @@ function Post() {
                 Save
               </Button>
             )}
-
             {isAuthor && (
               <>
                 <Link to={`/edit-post/${selectedPost.$id}`}>

@@ -3,7 +3,7 @@ import { Container, PostCard } from "../components";
 
 function SavedPosts() {
   const savedPosts = useSelector((state) => state.posts.savedPosts);
-
+  console.log(savedPosts)
   return (
     <div className="w-full py-8">
       <Container>
@@ -11,7 +11,7 @@ function SavedPosts() {
         <div className="flex flex-wrap justify-center">
           {savedPosts.length > 0 ? (
             savedPosts.map((post) => (
-              <div key={post.$id} className="p-2 w-1/4">
+              <div key={post.$createdAt} className="p-2 w-1/4">
                 <PostCard {...post} />
               </div>
             ))

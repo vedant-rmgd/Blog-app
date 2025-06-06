@@ -6,7 +6,11 @@ import { RTE, Input, Button, Select } from "../index";
 import service from "../../appwrite/config";
 import storageService from "../../appwrite/storageService";
 import { useDispatch } from "react-redux";
-import { setSelectedPost, setPosts } from "../../store/postSlice";
+import {
+  setSelectedPost,
+  setPosts,
+  addSavedPosts,
+} from "../../store/postSlice";
 
 function PostForm({ post }) {
   const { register, handleSubmit, watch, setValue, control, getValues } =
@@ -22,6 +26,7 @@ function PostForm({ post }) {
   const navigate = useNavigate();
   const userData = useSelector((state) => state.auth.userData);
   const posts = useSelector((state) => state.posts.posts);
+  const savedPosts = useSelector((state) => state.posts.savedPosts);
   const dispatch = useDispatch();
   const [localImage, setLocalImage] = useState(null);
 
@@ -35,17 +40,35 @@ function PostForm({ post }) {
         await storageService.deleteFile(post.featuredImage);
       }
 
-      const dbPost = await service.updatePost(post.$id, {
+      // const dbPost = await service.updatePost(post.$id, {
+      //   ...data,
+      //   featuredImage: file ? file.$id : undefined,
+      // });
+
+      await service.updatePost(post.$id, {
         ...data,
         featuredImage: file ? file.$id : undefined,
       });
 
+      // ✅ Fetch the fully updated post
+      const dbPost = await service.getPost(post.$id);
+
       if (dbPost) {
         dispatch(setSelectedPost(dbPost));
+
         const updatedPosts = posts.map((p) =>
           p.$id === dbPost.$id ? dbPost : p
         );
         dispatch(setPosts(updatedPosts));
+
+        const isSaved = savedPosts.some((post) => post.$id === dbPost.$id);
+        if (isSaved) {
+          const updatedSavedPosts = savedPosts.map((post) =>
+            post.$id === dbPost.$id ? dbPost : post
+          );
+          dispatch(addSavedPosts(updatedSavedPosts));
+          localStorage.setItem("savedPosts", JSON.stringify(updatedSavedPosts));
+        }
         navigate(`/post/${dbPost.$id}`);
       }
     } else {
