@@ -22,15 +22,14 @@ A fully functional and modern blog application built using React, Redux, React H
 
 🧠 Optimized logic to avoid unnecessary backend calls
 
-## 🧰 Tech Stack Used
-### Tech	         Purpose
-React -	             Frontend framework for building UI
-Redux Toolkit -	     Global state management (auth state, posts, saved posts)
-React Hook Form	-    Efficient and performant form handling
-TinyMCE	Rich Text -  Editor used in the Post Form
-Appwrite -           Backend as a service (Auth, DB, File Storage)
-React Router -	     Client-side routing between pages
-Tailwind CSS - 	    Utility-first styling framework for UI
+## 🧰 Tech Stack Used  
+React -	             Frontend framework for building UI  
+Redux Toolkit -	     Global state management (auth state, posts, saved posts)  
+React Hook Form	-    Efficient and performant form handling  
+TinyMCE	Rich Text -  Editor used in the Post Form  
+Appwrite -           Backend as a service (Auth, DB, File Storage)  
+React Router -	     Client-side routing between pages  
+Tailwind CSS - 	    Utility-first styling framework for UI  
 
 ## 🧪 How to Run Locally
 git clone https://github.com/vedant-rmgd/Blog-app  
