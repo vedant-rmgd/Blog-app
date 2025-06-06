@@ -11,7 +11,7 @@ import Home from "./pages/Home.jsx";
 import Login from "./pages/Login.jsx";
 import Post from "./pages/Post.jsx";
 import Signup from "./pages/Signup.jsx";
-import Protected from "./components/authLayout.jsx";
+import Protected from "./components/Protected.jsx";
 import SavedPosts from "./pages/SavedPosts.jsx";
 
 const router = createBrowserRouter([
