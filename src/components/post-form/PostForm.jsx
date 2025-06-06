@@ -114,8 +114,8 @@ function PostForm({ post }) {
   }, [watch, slugTransform, setValue]);
 
   return (
-    <form onSubmit={handleSubmit(submit)} className="flex flex-wrap">
-      <div className="w-2/3 px-2">
+    <form onSubmit={handleSubmit(submit)} className="flex flex-wrap gap-y-6">
+      <div className="w-full lg:w-2/3 px-2">
         <Input
           label="Title"
           placeholder="title"
@@ -143,7 +143,7 @@ function PostForm({ post }) {
         />
       </div>
 
-      <div className="w-1/3 px-2">
+      <div className="w-full lg:w-2/3 px-2">
         <Input
           label="Featured Image :"
           type="file"
@@ -159,7 +159,7 @@ function PostForm({ post }) {
                 localImage || storageService.getFilePreview(post.featuredImage)
               }
               alt="selected"
-              className="rounded-lg object-cover"
+              className="rounded-lg object-cover w-full h-auto max-h-[200px]"
               style={{ width: "100%", maxHeight: "200px" }}
             />
           </div>

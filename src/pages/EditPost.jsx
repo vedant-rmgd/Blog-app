@@ -73,6 +73,7 @@ function EditPost() {
   return selectedPost ? (
     <div className="py-8">
       <Container>
+        <h2 className="text-2xl font-bold mb-2">Edit Post</h2>
         <PostForm post={selectedPost} />
       </Container>
     </div>

@@ -128,14 +128,14 @@ function Post() {
   return selectedPost ? (
     <div className="py-8">
       <Container>
-        <div className="w-full flex justify-center mb-4 relative border rounded-xl p-2">
+        <div className="w-full flex flex-col sm:flex-row sm:justify-center mb-4 relative border rounded-xl p-2 sm:p-4">
           <img
             src={storageService.getFilePreview(selectedPost.featuredImage)}
             alt={selectedPost.title}
             className="w-full max-w-[600px] max-h-[300px] object-cover rounded-lg"
             width={500}
           />
-          <div className="absolute right-6 top-6">
+          <div className="flex justify-center gap-2 sm:absolute sm:right-6 sm:top-6 mt-4 sm:mt-0">
             {isSaved ? (
               <Button
                 onClick={handleUnsave}
@@ -169,9 +169,9 @@ function Post() {
         </div>
 
         <div className="w-full mb-6">
-          <h1 className="text-2xl font-bold">{selectedPost.title}</h1>
+          <h1 className="text-2xl font-bold mb-4 break-words">{selectedPost.title}</h1>
         </div>
-        <div className="browser-css">{parse(selectedPost.content)}</div>
+        <div className="browser-css text-justify">{parse(selectedPost.content)}</div>
       </Container>
     </div>
   ) : null;

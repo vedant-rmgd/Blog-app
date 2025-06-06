@@ -47,16 +47,17 @@ function Home() {
   }
 
   return (
-    <div className="w-full py-8">
+    <div className="w-full py-8 ">
       <Container>
+        <h2 className="text-2xl font-bold mb-2">Home</h2>
         {loading && <p className="text-center w-full">Loading posts...</p>}
         {error && <p className="text-center text-red-500">{error}</p>}
         {!loading && posts.length === 0 && (
           <p className="text-center w-full">No posts found.</p>
         )}
-        <div className="flex flex-wrap">
+        <div className="flex flex-wrap gap-4">
           {posts.map((post) => (
-            <div key={post.$id} className="p-2 w-1/4">
+            <div key={post.$id} className="p-2 w-full sm:w-1/2 md:w-1/3 lg:w-1/4">
               <PostCard {...post} />
             </div>
           ))}

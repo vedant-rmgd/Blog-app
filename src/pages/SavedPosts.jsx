@@ -16,11 +16,11 @@ function SavedPosts() {
   return (
     <div className="w-full py-8">
       <Container>
-        <h1 className="text-2xl font-bold mb-2">Saved Posts</h1>
+        <h2 className="text-2xl font-bold mb-2">Saved Posts</h2>
         <div className="flex flex-wrap justify-center">
           {savedPosts.length > 0 ? (
             savedPosts.map((post) => (
-              <div key={post.$createdAt} className="p-2 w-1/4">
+              <div key={post.$createdAt} className="p-2 w-full sm:w-1/2 md:w-1/3 lg:w-1/4">
                 <PostCard {...post} />
               </div>
             ))
