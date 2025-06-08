@@ -7,23 +7,32 @@ import service from "../appwrite/config";
 function SavedPosts() {
   const savedPosts = useSelector((state) => state.posts.savedPosts);
   const dispatch = useDispatch();
-  console.log(savedPosts);
 
   useEffect(() => {
-    const validateSavedPosts = async () => {
-      const validPosts = [];
+    if (savedPosts.length > 0) {
+      const validateSavedPosts = async () => {
+        const validPosts = [];
 
-      for (const post of savedPosts) {
-        const existingPost = await service.getPost(post.$id);
-        if (existingPost) {
-          validPosts.push(existingPost);
+        for (const post of savedPosts) {
+          try {
+            const existingPost = await service.getPost(post.$id);
+            if (existingPost) {
+              validPosts.push(existingPost);
+            }
+          } catch (error) {
+            console.warn(`Post with ID ${post.$id} was deleted.`);
+          }
         }
-      }
-      dispatch(setSavedPosts(validPosts));
-      localStorage.setItem("savedPosts", JSON.stringify(validPosts));
-    };
 
-    validateSavedPosts();
+        dispatch(setSavedPosts(validPosts));
+        localStorage.setItem("savedPosts", JSON.stringify(validPosts));
+      };
+      const timeout = setTimeout(() => {
+        validateSavedPosts();
+      }, 1000); 
+
+      return () => clearTimeout(timeout);
+    }
   }, []);
 
   return (
