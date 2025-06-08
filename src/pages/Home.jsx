@@ -55,7 +55,7 @@ function Home() {
         {!loading && posts.length === 0 && (
           <p className="text-center w-full">No posts found.</p>
         )}
-        <div className="flex flex-wrap gap-4">
+        <div className="flex flex-wrap">
           {posts.map((post) => (
             <div key={post.$id} className="p-2 w-full sm:w-1/2 md:w-1/3 lg:w-1/4">
               <PostCard {...post} />
